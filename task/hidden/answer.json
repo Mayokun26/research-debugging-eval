@@ -1,0 +1,13 @@
+{
+  "flaw_class": "provenance",
+  "file": "data/derived/features.parquet",
+  "mechanism_code": "M3",
+  "evidence_fields": [
+    "affected_columns",
+    "affected_patient_ids",
+    "affected_site",
+    "aggregate_columns_identical",
+    "artifact_key_matches_current",
+    "file_position_matches_committed"
+  ]
+}

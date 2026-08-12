@@ -1,0 +1,12 @@
+{
+  "bootstrap_samples": 2000,
+  "cohort_patients": 2500,
+  "delta_auroc_gbm_minus_lr": 0.042192,
+  "delta_ci_95": [
+    0.024793,
+    0.059719
+  ],
+  "folds": 5,
+  "gbm_auroc": 0.78733,
+  "lr_auroc": 0.745138
+}

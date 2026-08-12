@@ -1,0 +1,21 @@
+study:
+  observation_hours: 48
+  readmission_days: 30
+  labs:
+    - sodium
+    - creatinine
+    - hemoglobin
+    - heart_rate
+evaluation:
+  folds: 5
+  fold_seed: 2718
+  bootstrap_seed: 31415
+  bootstrap_samples: 2000
+  model_seed: 1618
+  reporting_precision: 6
+models:
+  logistic_c: [0.1, 1.0, 10.0]
+  gbm_leaf_nodes: [7, 15, 31]
+  inner_folds: 3
+reporting:
+  cohort_label: two-site derivation cohort
