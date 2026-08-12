@@ -63,8 +63,8 @@ tools/canonical-run.sh python task/validity_harness.py
 uv run inspect eval harness_example.py --model <your-model>
 ```
 
-Two consecutive audit runs produce byte-identical output. If they do not on
-your machine, that is a finding; open an issue.
+Two consecutive audit runs produce byte-identical output. If they don't match
+on your machine, that's a finding. Open an issue.
 
 ## Status
 
