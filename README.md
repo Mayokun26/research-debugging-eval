@@ -33,11 +33,11 @@ only works once.
 ## Design principles
 
 No language model judges anything. Grading is a frozen verifier: closed-enum
-diagnosis matching, measured evidence, and a rebuild gate that deletes the
-submitted derived artifacts, regenerates them from the submitted source, and
-requires the reported conclusion to reproduce within tolerance. A submission
-whose committed outputs disagree with what its own source rebuilds does not
-pass.
+diagnosis matching, measured evidence, and a rerun gate. The verifier reruns the
+analysis from the submitted source, independently regenerates the derived feature
+table from the raw records, and requires both that table and the reported
+conclusion to agree with what the rerun produces. A submission whose committed
+outputs disagree with what its own source rebuilds does not pass.
 
 Evidence fields are graded only when their correct value is forced: exact-zero
 agreement checks, unit fractions, or ratios whose denominator the instruction
