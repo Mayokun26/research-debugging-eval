@@ -7,8 +7,11 @@ methodological reason, can an AI agent find the cause, repair it, rerun the
 analysis, and report a corrected conclusion that survives independent
 verification?
 
-Everything needed to inspect or run the task is here, including the parts an
-evaluated agent never sees. This task is published as a transparency example.
+It runs under Inspect. `inspect_task.py` is a working `inspect_ai` task: it maps the
+study repository into a Docker sandbox, runs an agent against it with bash and a text
+editor, then pulls the submission back out and grades it with the hidden verifier,
+outside the sandbox. Everything needed to run or audit the task is here, including the
+parts an evaluated agent never sees. This task is published as a transparency example.
 Companion tasks used for actual measurement stay private, because a holdout
 only works once.
 
@@ -25,8 +28,9 @@ only works once.
   world, asserts the intended numbers, feeds the oracle and a battery of
   wrong and partial submissions through the real verifier, and checks that
   the instruction's embedded contract matches what the grader loads.
-- `harness_example.py` is a minimal Inspect-native harness that runs the task
-  in a sandbox and grades submissions out of sandbox.
+- `inspect_task.py` is the Inspect task. It builds the sandbox from `Dockerfile`, maps
+  27 repository files in, drives the agent, extracts `/submission`, and scores it with
+  the frozen verifier on the host. The scorer is the real grader, not a stand-in.
 - `tools/canonical-run.sh` is the pinned environment every number in this
   repository is defined against.
 
@@ -60,7 +64,7 @@ Requires Python 3.11+ and [uv](https://github.com/astral-sh/uv).
 tools/canonical-run.sh python task/validity_harness.py
 
 # run an agent against it with Inspect
-uv run inspect eval harness_example.py --model <your-model>
+uv run inspect eval inspect_task.py --model <your-model>
 ```
 
 Two consecutive audit runs produce byte-identical output. If they don't match
