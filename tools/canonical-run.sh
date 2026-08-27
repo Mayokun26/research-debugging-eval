@@ -14,4 +14,4 @@ while IFS= read -r pin; do
   WITH_ARGS+=(--with "$pin")
 done < "$ROOT/canonical-env.txt"
 
-exec uv run --quiet --no-project "${WITH_ARGS[@]}" "$@"
+exec env RUST_LOG=error uv run --quiet --no-project "${WITH_ARGS[@]}" "$@"

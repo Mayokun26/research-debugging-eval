@@ -5,7 +5,7 @@ ENV PIP_DISABLE_PIP_VERSION_CHECK=1 \
     PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1
 
-# Pins mirror canonical-env.txt so sandbox computations agree with verification.
+# Runtime pins below match canonical-env.txt. Audit-only tools stay outside the sandbox.
 RUN python -m pip install \
     numpy==2.4.6 \
     pandas==3.0.5 \
