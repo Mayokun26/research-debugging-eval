@@ -4,8 +4,8 @@ This repository contains one complete, executable evaluation task for a
 question that decides whether autonomous data analysis is safe to delegate:
 given a research repository whose headline conclusion is wrong for a latent
 methodological reason, can an AI agent find the cause, repair it, rerun the
-analysis, and report a corrected conclusion that survives independent
-verification?
+analysis, and report a corrected conclusion that the hidden verifier can
+reproduce?
 
 It runs under Inspect. `inspect_task.py` is a working `inspect_ai` task: it maps the
 study repository into a Docker sandbox, runs an agent against it with bash and a text
@@ -72,9 +72,10 @@ on your machine, that's a finding. Open an issue.
 
 ## Status
 
-One task, published as a worked example, from a private set built and
-adversarially audited during 2026. Frontier agents solve this task given an
-adequate working budget; measurement interest in the private set centers on
+One task, published as a worked example, from a private set built and tested
+internally with agent assistance during 2026. The package has not received
+independent human review. Frontier agents solve this task given an adequate
+working budget; measurement interest in the private set centers on
 budget-conditioned reliability and on whether agents under budget pressure
 fail silent or fail wrong. Questions and review requests are welcome through
 issues.
