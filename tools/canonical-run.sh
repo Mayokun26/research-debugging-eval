@@ -1,5 +1,5 @@
 #!/bin/bash
-# Run any command with the release's pinned data-science dependencies.
+# Run any command with the release's recorded direct dependency versions.
 #
 # Usage: tools/canonical-run.sh <command...>
 #   tools/canonical-run.sh python script.py

@@ -58,7 +58,7 @@ def sandbox_files(task_root: Path) -> dict[str, str]:
 
 
 def uv_python_command(script: Path, *arguments: str) -> list[str]:
-    """Run a task script with its pinned data-science dependencies via uv."""
+    """Run a task script with its recorded direct dependencies via uv."""
     command = ["uv", "run", "--quiet", "--no-project"]
     for dependency in HOST_DEPENDENCIES:
         command.extend(("--with", dependency))

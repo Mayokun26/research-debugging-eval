@@ -31,8 +31,9 @@ only works once.
 - `inspect_task.py` is the Inspect task. It builds the sandbox from `Dockerfile`, maps
   27 repository files in, drives the agent, extracts `/submission`, and scores it with
   the frozen verifier on the host. The scorer is the real grader, not a stand-in.
-- `tools/canonical-run.sh` is the pinned environment every number in this
-  repository is defined against.
+- `tools/canonical-run.sh` fixes the direct data-science and audit-tool
+  dependency versions used to produce every reported number. Python, `uv`,
+  transitive packages, and the Docker base-image digest are not pinned.
 
 ## Design principles
 
@@ -57,14 +58,21 @@ counterfeits is not measuring what it claims to measure.
 
 ## Running it
 
-Requires Python 3.11+ and [uv](https://github.com/astral-sh/uv).
+The validity audit requires Python 3.11+ and
+[uv](https://github.com/astral-sh/uv). Running an agent also requires Docker,
+model-provider credentials, and network access for that provider.
 
 ```bash
 # audit the task end to end (verifier, oracle, counterfeit battery)
 tools/canonical-run.sh python task/validity_harness.py
 
-# run an agent against it with Inspect
-uv run inspect eval inspect_task.py --model <your-model>
+# check that Inspect discovers the task
+env RUST_LOG=error uv run --quiet --no-project --with inspect-ai==0.3.260 \
+  inspect list tasks inspect_task.py
+
+# run an agent against it with the same Inspect version
+env RUST_LOG=error uv run --quiet --no-project --with inspect-ai==0.3.260 \
+  inspect eval inspect_task.py --model <your-model>
 ```
 
 Two consecutive audit runs produce byte-identical output. If they don't match
@@ -74,8 +82,6 @@ on your machine, that's a finding. Open an issue.
 
 One task, published as a worked example, from a private set built and tested
 internally with agent assistance during 2026. The package has not received
-independent human review. Frontier agents solve this task given an adequate
-working budget; measurement interest in the private set centers on
-budget-conditioned reliability and on whether agents under budget pressure
-fail silent or fail wrong. Questions and review requests are welcome through
-issues.
+independent human review. This repository demonstrates task and grader
+construction; it does not report model-performance results. Questions and
+review requests are welcome through issues.
